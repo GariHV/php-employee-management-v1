@@ -5,6 +5,12 @@
  * @author: Jose Manuel Orts
  * @date: 11/06/2020
  */
+function listEmployee(){
+$content = file_get_contents(".././../resources/employees.json");
+return json_decode($content);
+}
+
+
 
 function addEmployee(array $newEmployee)
 {
