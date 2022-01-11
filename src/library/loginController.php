@@ -1,24 +1,4 @@
 <?php
-
-function finishSession(){
-    session_start();
-    unset($_SESSION);
-        if (ini_get("session.use_cookies")) {
-            $params = session_get_cookie_params();
-            setcookie(
-                session_name(),
-                '',
-                time() - 42000,
-                $params["path"],
-                $params["domain"],
-                $params["secure"],
-                $params["httponly"]
-            );
-        }
-    session_destroy();
-    header("Location: ./loginManager.php");
-}
-
 function validatePassword(){
         $fil="../../json/users.json";
     $Allusers= file_get_contents($fil);
@@ -29,11 +9,10 @@ function validatePassword(){
         header(("Location: ./login.php?InvalidCredential"));
         foreach ($usersAll as $user ) {
             if($postEmail == $user->email){
-                if($postPassword == password_verify($postPassword, $user->password)){
+                if(password_verify($postPassword, $user->password)){
                     session_start();
                     $_SESSION["email"]= $postEmail;
                     $_SESSION["user"]= $user->name;
-                    $_SESSION["password"]=$postPassword;
                     header("Location: ../../index.php");
                     exit();
                 }

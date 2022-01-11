@@ -16,7 +16,7 @@ function createGrid(employees){
         width: "100%",
 
         filtering: true,
-        editing: true,
+        editing: false,
         inserting: true,
         sorting: true,
         paging: true,
@@ -25,6 +25,15 @@ function createGrid(employees){
         deleteConfirm: "Do you really want to delete data?",
 
         data: employees,
+
+        rowClick: function displayEdit(args){
+            /* ADD MODAL TOGGLE */
+            document.getElementById('nav-dashboard').classList.remove('active');
+            document.getElementById('nav-employee').classList.add('active');
+            document.getElementById('main-dashboard').classList.add('hide-dashboard');
+            /* añadir funcion para obtener info */
+            document.getElementById('editForm').classList.remove('hide-edit-form');
+        },
 
 
 
