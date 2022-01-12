@@ -25,3 +25,7 @@ if(isset($_GET["edit"])){
 // if(isset($_GET["editEmployee"])){
 //     header("Location: ../employee.php?editEmployee");
 // }
+
+if(isset($_GET["add"])){
+    addEmployee();
+}

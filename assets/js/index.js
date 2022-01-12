@@ -15,6 +15,7 @@ function createGrid(employees){
         width: "100%",
         filtering: true,
         editing: true,
+        inserting: true,
         sorting: true,
         paging: true,
         autoload: true,
@@ -36,7 +37,7 @@ function createGrid(employees){
             { name: "phoneNumber", type: "number", title: "Phone Number" },
             { type: "control", rowClick: true, modeSwitchButton: true, editButton: true}
             ],
-    
+
         rowClick: function displayEdit(args){
            /* ADD MODAL TOGGLE */
             window.location.assign('./employee.php?id='+args.item.id)
@@ -44,11 +45,28 @@ function createGrid(employees){
 
         controller: {
         insertItem: async function name(item){
-            const response = await fetch(k, {
-                method: 'POST', body : JSON.stringify(item),
-            headers: { 'Content-Type': 'aplication/json'}});
-            const data = await response.json();
-            return data;
+            var formData = new FormData();
+            formData.append('id', item.id);
+            formData.append('name', item.name);
+            formData.append('lastName', item.lastName);
+            formData.append('email', item.email);
+            formData.append('age', item.age);
+            formData.append('gender', item.gender);
+            formData.append('city', item.city);
+            formData.append('state', item.state);
+            formData.append('streetAddress', item.streetAddress);
+            formData.append('phoneNumber', item.phoneNumber);
+            formData.append('postalCode', item.postalCode);
+            console.log(item)
+            console.log(formData)
+            
+            const response = await fetch('./library/employeeController.php?add', {
+                method: 'POST', body : formData,
+            // headers: { 'Content-Type': 'aplication/json'}
+        });
+        console.log(formData["name"])
+            // const data = await response.json();
+            // return data;
         },
 
         deleteItem: function name(item){},
@@ -69,7 +87,7 @@ function createGrid(employees){
             const response = await fetch('./library/employeeController.php?edit='+item.id,
             { method: 'POST', body :formData});
         },
-            
+
         },
     });
 }

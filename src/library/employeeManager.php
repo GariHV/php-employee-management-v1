@@ -1,43 +1,53 @@
 <?php
+
 /**
  * EMPLOYEE FUNCTIONS LIBRARY
  *
  * @author: Jose Manuel Orts
  * @date: 11/06/2020
  */
-function listEmployee(){
-$content = file_get_contents(".././../resources/employees.json");
-return json_decode($content);
+function listEmployee()
+{
+    $content = file_get_contents(".././../resources/employees.json");
+    return json_decode($content);
 }
 
 
 
-function addEmployee(array $newEmployee)
+function addEmployee()
 {
-// TODO implement it
+    // TODO implement it
+
+
+
     $allEmployees = listEmployee();
-    $newId = count($allEmployees) +1 ;
-    $newEmployee ["id"] = $newId;
+    print_r($allEmployees);
+    $newId = count($allEmployees) + 1;
+    $newEmployee = array(
+        "id" => $newId, "name" => $_POST["name"], "lastName" => $_POST["lastName"], "gender" => $_POST["gender"], "email" => $_POST["email"], "age" => $_POST["age"], "city" => $_POST["city"],
+        "state" => $_POST["state"], "streetAddress" => $_POST["streetAddress"], "phoneNumber" => $_POST["phoneNumber"], "postalCode" => $_POST["postalCode"]
+    );
+
+
     array_push($allEmployees, $newEmployee);
-    $findPath = ".././../resources/employees.json";
-    if (file_exists ($findPath)){
-        file_put_contents ($findPath, JSON_PRETTY_PRINT);
-    }
+    $jsonClients = json_encode($allEmployees);
+    $file = (".././../resources/employees.json");
+    file_put_contents($file, $jsonClients);
 }
 
 
 function deleteEmployee(string $id)
 {
-// TODO implement it
+    // TODO implement it
 }
 
 
 function updateEmployee($updateEmployee)
 {
-// TODO implement it
+    // TODO implement it
     $empleados = listEmployee();
-    foreach($empleados as $empleado){
-        if($empleado->id == $updateEmployee){
+    foreach ($empleados as $empleado) {
+        if ($empleado->id == $updateEmployee) {
             $empleado->id = $_POST["id"];
             $empleado->name = $_POST["name"];
             $empleado->gender = $_POST["gender"];
@@ -53,34 +63,35 @@ function updateEmployee($updateEmployee)
     }
     echo ($_POST['city']);
     sendEmployee($empleados);
-    header('Location: ./library/employeeController.php?edit='+ $updateEmployee);
+    header('Location: ./library/employeeController.php?edit=' + $updateEmployee);
 }
 
-function sendEmployee($content){
-    $file=".././../resources/employees.json";
-    $usersAll=json_encode($content);
-    $Allusers= file_put_contents($file,$usersAll);
-}
-
-
-function getEmployee(string $id)
+function sendEmployee($content)
 {
-// TODO implement it
+    $file = ".././../resources/employees.json";
+    $usersAll = json_encode($content);
+    $Allusers = file_put_contents($file, $usersAll);
 }
 
 
-function removeAvatar($id)
-{
-// TODO implement it
-}
+// function getEmployee(string $id)
+// {
+//     // TODO implement it
+// }
 
 
-function getQueryStringParameters(): array
-{
-// TODO implement it
-}
+// function removeAvatar($id)
+// {
+//     // TODO implement it
+// }
 
-function getNextIdentifier(array $employeesCollection): int
-{
-// TODO implement it
-}
+
+// function getQueryStringParameters(): array
+// {
+//     // TODO implement it
+// }
+
+// function getNextIdentifier(array $employeesCollection): int
+// {
+//     // TODO implement it
+// }
