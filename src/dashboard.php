@@ -3,6 +3,7 @@
 session_start();
 isset($_SESSION["email"]) ? "": header("Location: ../index.php") ;
 $userName=$_SESSION["email"];
+require_once('./library/employeeManager.php')
 ?>
 
 <!doctype html>

@@ -15,6 +15,14 @@ return json_decode($content);
 function addEmployee(array $newEmployee)
 {
 // TODO implement it
+    $allEmployees = listEmployee();
+    $newId = count($allEmployees) +1 ;
+    $newEmployee ["id"] = $newId;
+    array_push($allEmployees, $newEmployee);
+    $findPath = ".././../resources/employees.json";
+    if (file_exists ($findPath)){
+        file_put_contents ($findPath, JSON_PRETTY_PRINT);
+    }
 }
 
 
