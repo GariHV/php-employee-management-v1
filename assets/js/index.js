@@ -10,48 +10,20 @@ async function getEmployees(){
     }
 
 function createGrid(employees){
-    $('#gridTable').jsGrid({
-
-        height: "auto",
+    $("#gridTable").jsGrid({
+        height: "90%",
         width: "100%",
-
         filtering: true,
-        editing: false,
-        inserting: true,
+        editing: true,
         sorting: true,
         paging: true,
+        autoload: true,
         pageSize: 15,
         pageButtonCount: 5,
-        deleteConfirm: "Do you really want to delete data?",
+        deleteConfirm: "Do you really want to delete the client?",
 
         data: employees,
 
-        rowClick: function displayEdit(args){
-            /* ADD MODAL TOGGLE */
-
-        },
-
-controller: {
-    insertItem: async function name(item){
-        const response = await fetch(k, {
-            method: 'POST', body : JSON.stringify(item),
-            headers: { 'Content-Type': 'aplication/json'}});
-            const data = await response.json();
-            return data;
-    },
-
-    deleteItem: function name(item){},
-
-    updateItem: async function name (item){
-        console.log(item)
-
-                const response = await fetch(k, {
-            method: 'POST', body : JSON.stringify(item),
-            headers: { 'Content-Type': 'aplication/json'}});
-            const data = await response.json();
-            return data;
-    },
-},
 
         fields: [
             { name: "name", type: "text", title: "Name"},
@@ -62,9 +34,42 @@ controller: {
             { name: "state", type: "text", title: "State" },
             { name: "postalCode", type: "number", title: "Postal Code" },
             { name: "phoneNumber", type: "number", title: "Phone Number" },
-            { type: "control", modeSwitchButton: true, editButton: true}
+            { type: "control", rowClick: true, modeSwitchButton: true, editButton: true}
             ],
+    
+        rowClick: function displayEdit(args){
+           /* ADD MODAL TOGGLE */
+            window.location.assign('./employee.php?id='+args.item.id)
+        },
 
+        controller: {
+        insertItem: async function name(item){
+            const response = await fetch(k, {
+                method: 'POST', body : JSON.stringify(item),
+            headers: { 'Content-Type': 'aplication/json'}});
+            const data = await response.json();
+            return data;
+        },
 
-})
+        deleteItem: function name(item){},
+
+        updateItem: async function name (item){
+            var formData = new FormData();
+            formData.append('id', item.id);
+            formData.append('name', item.name);
+            formData.append('lastName', item.lastName);
+            formData.append('email', item.email);
+            formData.append('age', item.age);
+            formData.append('gender', item.gender);
+            formData.append('city', item.city);
+            formData.append('state', item.state);
+            formData.append('streetAddress', item.streetAddress);
+            formData.append('phoneNumber', item.phoneNumber);
+            formData.append('postalCode', item.postalCode);
+            const response = await fetch('./library/employeeController.php?edit='+item.id,
+            { method: 'POST', body :formData});
+        },
+            
+        },
+    });
 }

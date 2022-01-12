@@ -50,7 +50,8 @@ $userName=$_SESSION["email"];
 </head>
   <body class="d-flex flex-column h-100">
 
-
+        <!-- HEADER WITH PHP -->
+        <?php include('../assets/html/h.html')?>
 <!-- Begin page content -->
 <section id="dashboard">
 
@@ -125,14 +126,8 @@ $userName=$_SESSION["email"];
 </section>
 
 
-<footer class="footer mt-auto py-3 bg-light">
-  <div class="container">
-    <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
-    <span class="text-muted">PHP - Employee - Management v1 © 2022</span>
-  </div>
-</footer>
-
-
+        <!-- INSERT FOOTER -->
+        <?php include('../assets/html/footer.html')?>
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 
       

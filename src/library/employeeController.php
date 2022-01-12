@@ -7,6 +7,10 @@ if (isset($_GET["getEmployees"])) {
     echo json_encode($result);
 }
 
+if(isset($_GET["edit"])){
+    updateEmployee($_GET["edit"]);
+}
+
 // if(isset($_POST["createEmployees"])){
 //     $info = $_REQUEST;
 //     unset($data["submit"]);
