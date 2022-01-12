@@ -1,1 +1,27 @@
-required once
+
+
+<header>
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+      <img src="./assets/img/29744343_415615545548920_7222466440612695631_o.png" alt="">
+      <a class="navbar-brand" href="#"> <b>PHP - Employee - Management v1</b></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a id= 'nav-dashboard' class="nav-link active" aria-current="page">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a id='nav-employee' class="nav-link">Employee</a>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <a href='./src/library/sessionHelper.php' class="btn btn-outline-success">Logout</a>
+        </form>
+      </div>
+    </div>
+  </nav>
+</header>

@@ -31,11 +31,3 @@ footer{
     color:inherit;
     opacity:0.75;
 }
-
-.hide-dashboard{
-    display: none  !important;
-}
-
-.hide-edit-form{
-    display: none !important;
-}

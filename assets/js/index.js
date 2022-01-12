@@ -2,9 +2,9 @@ window.addEventListener('DOMContentLoaded', async () => {
     const employees = await getEmployees();
     createGrid(employees);
 })
-
+console.log('a')
 async function getEmployees(){
-    const response = await fetch(`./src/library/employeeController.php?getEmployees`);
+    const response = await fetch(`./library/employeeController.php?getEmployees`);
     const data = await response.json();
     return data;
     }
@@ -28,14 +28,30 @@ function createGrid(employees){
 
         rowClick: function displayEdit(args){
             /* ADD MODAL TOGGLE */
-            document.getElementById('nav-dashboard').classList.remove('active');
-            document.getElementById('nav-employee').classList.add('active');
-            document.getElementById('main-dashboard').classList.add('hide-dashboard');
-            /* añadir funcion para obtener info */
-            document.getElementById('editForm').classList.remove('hide-edit-form');
+
         },
 
+controller: {
+    insertItem: async function name(item){
+        const response = await fetch(k, {
+            method: 'POST', body : JSON.stringify(item),
+            headers: { 'Content-Type': 'aplication/json'}});
+            const data = await response.json();
+            return data;
+    },
 
+    deleteItem: function name(item){},
+
+    updateItem: async function name (item){
+        console.log(item)
+
+                const response = await fetch(k, {
+            method: 'POST', body : JSON.stringify(item),
+            headers: { 'Content-Type': 'aplication/json'}});
+            const data = await response.json();
+            return data;
+    },
+},
 
         fields: [
             { name: "name", type: "text", title: "Name"},
@@ -46,7 +62,7 @@ function createGrid(employees){
             { name: "state", type: "text", title: "State" },
             { name: "postalCode", type: "number", title: "Postal Code" },
             { name: "phoneNumber", type: "number", title: "Phone Number" },
-            { type: "control", modeSwitchButton: true, editButton: false}
+            { type: "control", modeSwitchButton: true, editButton: true}
             ],
 
 

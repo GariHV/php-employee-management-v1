@@ -1,53 +1,65 @@
 <?php
-require_once("./loginController.php");
-?>
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <link rel="stylesheet" href="../../assets/css/login.css">
-        <title>login</title>
-    </head>
-    <body>
-        <section class="vh-100 gradient-custom">
-            <div class="container py-5 h-100">
-                <div class="row d-flex justify-content-center align-items-center h-100">
-                    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-                        <div class="card bg-dark text-white" style="border-radius: 1rem;">
-                            <div class="card-body p-5 text-center">
-                                <div class="mb-md-5 mt-md-4 pb-5">
-                                    <img src="../../assets/img/29744343_415615545548920_7222466440612695631_o.png" alt="">
-                                    <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
-                                    <p class="text-white-50 mb-5">Please enter your login and password!</p>
-                                    <form action="./okpass.php" method="post">
-                                        <div class="form-outline form-white mb-4">
-                                            <input name="email" type="email" id="typeEmailX" class="form-control form-control-lg" />
-                                            <label class="form-label" for="typeEmailX">Email</label>
-                                        </div>
 
-                                        <div class="form-outline form-white mb-4">
-                                            <input name="password" type="password" id="typePasswordX" class="form-control form-control-lg" />
-                                            <label class="form-label" for="typePasswordX">Password</label>
-                                            <br>
-                                            <label class="form-label" for="typePasswordX"><?= isset($_GET["InvalidCredential"]) ? "Invalid Email or Password" : ""?></label>
-                                        </div>
+function registerNewUser(){
+    if(isset($_POST['email'])){
+    $cryptedPass = password_hash($_POST["password"], PASSWORD_DEFAULT);
+    $arr_clients= array("name" =>$_POST["name"],"email"=> $_POST["email"], "password" => $cryptedPass );
+    // $json_string = json_encode($arr_clients);
+    print_r ($arr_clients);
+    $file=("../../resources/users.json");
+    $Allusers= file_get_contents($file);
+    $usersAll= json_decode($Allusers);
+    // print_r($Allusers);
+    array_push($usersAll , $arr_clients);
+    print_r($usersAll);
+    $jsonUsers= json_encode($usersAll);
+    file_put_contents($file, $jsonUsers);
+    $nombreUser= $_POST['email'];
+    mkdir("../../root/$nombreUser",0777);
+/*     header(("Location:../../index.php"));
+ */}
+}
 
-                                    <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
+function validatePassword(){
+        $fil="../../resources/users.json";
+    $Allusers= file_get_contents($fil);
+    $usersAll= json_decode($Allusers);
+    if (($_POST)){
+        $postEmail= $_POST["email"];
+        $postPassword= $_POST["password"];
+        header(("Location: ../../index.php?InvalidCredential"));
+        foreach ($usersAll as $users) {
+            foreach ($users as $key) {
+                if($postEmail == $key->email){
+                    if(password_verify($postPassword, $key->password)){
+                        session_start();
+                        $_SESSION['LAST_ACTIVITY'] = time();
+                        $_SESSION["email"]= $key->email;
+                        $_SESSION["user"]= $key->name;
+                        header("Location: ../dashboard.php");
+                        exit();
+                    }
+                }
+            }
+        }
+    }
+}
 
-                                    <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
-                                    </form>
-                                </div>
-                                <div>
-                                <p class="mb-0">Don't have an account? <a href="./sessionHelper.php" class="text-white-50 fw-bold">Sign Up</a></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </body>
-</html>
+function exitSession(){
+        session_start();
+    unset($_SESSION);
+        if (ini_get("session.use_cookies")) {
+            $params = session_get_cookie_params();
+            setcookie(
+                session_name(),
+                '',
+                time() - 42000,
+                $params["path"],
+                $params["domain"],
+                $params["secure"],
+                $params["httponly"]
+            );
+        }
+    session_destroy();
+    header("Location: ./loginManager.php");
+}
