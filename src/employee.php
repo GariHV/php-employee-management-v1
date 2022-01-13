@@ -61,33 +61,33 @@ $userName = $_SESSION["email"];
     <div class=" d-flex flex-column h-100">
       <!-- Bootstrap core CSS -->
 
-<form>
-<div class="wrapper rounded bg-white form-control form-group">
-    <div class="h3">User Details</div>
-    <div class="form">
-      <div class="row">
-        <div class="col-md-6 mt-md-0 mt-3"> <label>First Name</label> <input type="text" class="form-control" required> </div>
-        <div class="col-md-6 mt-md-0 mt-3"> <label>Last Name</label> <input type="text" class="form-control" required> </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6 mt-md-0 mt-3"> <label>Email</label> <input type="email" class="form-control" required> </div>
-        <div class="col-md-6 mt-md-0 mt-3"> <label>Gender</label>
-          <div class="d-flex align-items-center mt-2"> <label class="option"> <input type="radio" name="radio">Male <span class="checkmark"></span> </label> <label class="option ms-4"> <input type="radio" name="radio">Female <span class="checkmark"></span> </label> </div>
+      <form>
+        <div class="wrapper rounded bg-white form-control form-group">
+          <div class="h3">User Details</div>
+          <div class="form">
+            <div class="row">
+              <div class="col-md-6 mt-md-0 mt-3"> <label>First Name</label> <input type="text" class="form-control" required> </div>
+              <div class="col-md-6 mt-md-0 mt-3"> <label>Last Name</label> <input type="text" class="form-control" required> </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mt-md-0 mt-3"> <label>Email</label> <input type="email" class="form-control" required> </div>
+              <div class="col-md-6 mt-md-0 mt-3"> <label>Gender</label>
+                <div class="d-flex align-items-center mt-2"> <label class="option"> <input type="radio" name="radio">Male <span class="checkmark"></span> </label> <label class="option ms-4"> <input type="radio" name="radio">Female <span class="checkmark"></span> </label> </div>
+              </div>
+              <div class="col-md-6 mt-md-0 mt-3"> <label>City</label> <input type="text" class="form-control" required> </div>
+              <div class="col-md-6 mt-md-0 mt-3"> <label>Street Address</label> <input type="text" class="form-control" required> </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mt-md-0 mt-3"> <label>State</label> <input type="text" class="form-control" required> </div>
+              <div class="col-md-6 mt-md-0 mt-3"> <label>Age</label> <input type="text" class="form-control" required> </div>
+              <div class="col-md-6 mt-md-0 mt-3"> <label>Postal Code</label> <input type="text" class="form-control" required> </div>
+              <div class="col-md-6 mt-md-0 mt-3"> <label>Phone Number</label> <input type="tel" class="form-control" required> </div>
+            </div>
+            <div class="btn btn-primary mt-3">Submit</div>
+          </div>
         </div>
-        <div class="col-md-6 mt-md-0 mt-3"> <label>City</label> <input type="text" class="form-control" required> </div>
-        <div class="col-md-6 mt-md-0 mt-3"> <label>Street Address</label> <input type="text" class="form-control" required> </div>
-      </div>
-      <div class="row">
-      <div class="col-md-6 mt-md-0 mt-3"> <label>State</label> <input type="text" class="form-control" required> </div>
-      <div class="col-md-6 mt-md-0 mt-3"> <label>Age</label> <input type="text" class="form-control" required> </div>
-      <div class="col-md-6 mt-md-0 mt-3"> <label>Postal Code</label> <input type="text" class="form-control" required> </div>
-        <div class="col-md-6 mt-md-0 mt-3"> <label>Phone Number</label> <input type="tel" class="form-control" required> </div>
-      </div>
-      <div class="btn btn-primary mt-3">Submit</div>
+      </form>
     </div>
-  </div>
-</form>
-  </div>
   </section>
 </body>
 
@@ -96,12 +96,4 @@ $userName = $_SESSION["email"];
 <?php include('../assets/html/footer.html') ?>
 <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 
-
-
-<<<<<<< HEAD
-    
-    </body>
 </html>
-=======
-</html>
->>>>>>> 5396b529e8b6638c05217498d006985bd1e4d96e
