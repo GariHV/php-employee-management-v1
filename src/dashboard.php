@@ -1,11 +1,11 @@
 <!-- TODO Main view or Employees Grid View here is where you get when logged here there's the grid of employees -->
 <?php
 session_start();
-isset($_SESSION["email"]) ? "": header("Location: ../index.php") ;
-$userName=$_SESSION["email"];
+isset($_SESSION["email"]) ? "" : header("Location: ../index.php");
+$userName = $_SESSION["email"];
 require_once('./library/employeeManager.php');
-if(isset($_GET["edit"])){
-    updateEmploye($_GET["edit"]);
+if (isset($_GET["edit"])) {
+    updateEmployeePhp($_GET["edit"]);
 }
 ?>
 

@@ -17,25 +17,18 @@ if (isset($_GET["edit"])) {
 //     addEmployee($data);
 // }
 
-// if(isset($_GET["delete"])){
-//     $id - $_GET["delete"];
-//     deleteEmployee($id);
-// }
+if (isset($_GET["delete"])) {
+    deleteEmployee($_GET["delete"]);
+}
 
-if(isset($_GET["editEmployee"])){
+if (isset($_GET["editEmployee"])) {
     header("Location: ../employee.php?editEmployee");
 }
 
-<<<<<<< HEAD
-if(isset($_GET["id"])){
-    header('Location: ../employee.php?id='+$_GET["id"]);
+if (isset($_GET["id"])) {
+    header('Location: ../employee.php?id=' + $_GET["id"]);
 }
-=======
-// if (isset($_GET["add"])) {
-//     addEmployee();
-// }
 
-// if(isset($_GET["id"])){
-//     header('Location: ../employee.php?id='+$_GET['id']);
-// }
->>>>>>> dc9ba421d032a73a7647da3ec8f099b3e6188379
+if (isset($_GET["add"])) {
+    addEmployee($_POST);
+}

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * EMPLOYEE FUNCTIONS LIBRARY
  *
@@ -15,14 +16,17 @@ function listEmployee()
 
 function addEmployee($newEmployee)
 {
+
     // TODO implement it
-    $empleadosUncode = file_get_contents("../resources/employees.json");
+    $empleadosUncode = file_get_contents("../../resources/employees.json");
     $empleadosDecode = json_decode($empleadosUncode);
+    print_r($empleadosDecode);
     $lastEmployee = end($empleadosDecode);
-    $newEmployee["id"] = $lastEmployee->id +1;
+    $newEmployee["id"] = $lastEmployee->id + 1;
     array_push($empleadosDecode, $newEmployee);
     echo "true";
-
+    $newest = json_encode($empleadosDecode);
+    file_put_contents("../../resources/employees.json", $newest);
 }
 
 
@@ -30,10 +34,10 @@ function deleteEmployee($id)
 {
     // TODO implement it
     $newEmployee = [];
-    $empleadosUncode = file_get_contents("../resources/employees.json");
+    $empleadosUncode = file_get_contents("../../resources/employees.json");
     $empleadosDecode = json_decode($empleadosUncode);
-        foreach ($empleadosDecode as $empleado) {
-        if (!$empleado->id == $id) {
+    foreach ($empleadosDecode as $empleado) {
+        if (!($empleado->id == $id)) {
             array_push($newEmployee, $empleado);
         }
     }
@@ -64,9 +68,40 @@ function updateEmployee($updateEmployee)
     sendEmployee($empleados);
 }
 
+function updateEmployeePhp($updateEmployee)
+{
+    // TODO implement it
+    $empleadosUncode = file_get_contents("../resources/employees.json");
+    $empleadosDecode = json_decode($empleadosUncode);
+    foreach ($empleadosDecode as $empleado) {
+
+        if ($empleado->id == $updateEmployee) {
+            $empleado->id = $_POST["id"];
+            $empleado->name = $_POST["name"];
+            $empleado->gender = $_POST["gender"];
+            $empleado->lastName = $_POST['lastName'];
+            $empleado->email = $_POST['email'];
+            $empleado->age = $_POST['age'];
+            $empleado->city = $_POST['city'];
+            $empleado->state = $_POST['state'];
+            $empleado->streetAddress = $_POST['streetAddress'];
+            $empleado->phoneNumber = $_POST['phoneNumber'];
+            $empleado->postalCode = $_POST['postalCode'];
+        }
+    }
+    sendEmployeePhp($empleadosDecode);
+}
+
 function sendEmployee($content)
 {
     $file = ".././../resources/employees.json";
+    $usersAll = json_encode($content);
+    $Allusers = file_put_contents($file, $usersAll);
+}
+
+function sendEmployeePhp($content)
+{
+    $file = "../resources/employees.json";
     $usersAll = json_encode($content);
     $Allusers = file_put_contents($file, $usersAll);
 }
@@ -78,8 +113,9 @@ function getEmployee($id)
     foreach ($empleadosDecode as $empleado) {
         if ($empleado->id == $id) {
             return $formInfo = array(
-        "id" => $empleado->id, "name" => $empleado->name, "lastName" => $empleado->lastName, "gender" => $empleado->gender, "email" => $empleado->email, "age" => $empleado->age, "city" => $empleado->age,
-        "state" => $empleado->state, "streetAddress" => $empleado->streetAddress, "phoneNumber" => $empleado->phoneNumber, "postalCode" => $empleado->postalCode);
+                "id" => $empleado->id, "name" => $empleado->name, "lastName" => $empleado->lastName, "gender" => $empleado->gender, "email" => $empleado->email, "age" => $empleado->age, "city" => $empleado->age,
+                "state" => $empleado->state, "streetAddress" => $empleado->streetAddress, "phoneNumber" => $empleado->phoneNumber, "postalCode" => $empleado->postalCode
+            );
         }
     }
 }

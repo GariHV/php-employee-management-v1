@@ -44,32 +44,19 @@ function createGrid(employees){
            /* ADD MODAL TOGGLE */
             window.location.assign('./employee.php?id='+args.item.id)
         },
-
-        controller: {
-        insertItem: async function name(item){
-            var formData = new FormData();
-            formData.append('id', item.id);
-            formData.append('name', item.name);
-            formData.append('lastName', item.lastName);
-            formData.append('email', item.email);
-            formData.append('age', item.age);
-            formData.append('gender', item.gender);
-            formData.append('city', item.city);
-            formData.append('state', item.state);
-            formData.append('streetAddress', item.streetAddress);
-            formData.append('phoneNumber', item.phoneNumber);
-            formData.append('postalCode', item.postalCode);
-            console.log(item)
-            console.log(formData)
-
-            const response = await fetch('./library/employeeController.php?add', {
-                method: 'POST', body : formData,
-            // headers: { 'Content-Type': 'aplication/json'}
-        });
-        console.log(formData["name"])
-            // const data = await response.json();
-            // return data;
+        onItemInserted: function name(args){
+            $.ajax({
+                method: "POST",
+                url: './library/employeeController.php?add',
+                data: args.item,
+                success: function(x){
+                    console.log(x)
+                    sendMessageOk("Employee Added Successfully")
+                }
+            })
         },
+        controller: {
+
 
         deleteItem: async function name(item){
             const response = await fetch ("./library/employeeController.php?delete="+item.id, {
@@ -78,6 +65,9 @@ function createGrid(employees){
             const date = await response.json();
             if(date == true){
                 sendMessageOk("Employee Deleted")
+            }
+            else {
+                sendMessageError("An error has occured");
             }
         },
 
