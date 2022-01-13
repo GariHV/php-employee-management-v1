@@ -1,5 +1,4 @@
 <?php
-
 /**
  * EMPLOYEE FUNCTIONS LIBRARY
  *
@@ -14,31 +13,32 @@ function listEmployee()
 
 
 
-function addEmployee()
+function addEmployee($newEmployee)
 {
     // TODO implement it
+    $empleadosUncode = file_get_contents("../resources/employees.json");
+    $empleadosDecode = json_decode($empleadosUncode);
+    $lastEmployee = end($empleadosDecode);
+    $newEmployee["id"] = $lastEmployee->id +1;
+    array_push($empleadosDecode, $newEmployee);
+    echo "true";
 
-
-
-    $allEmployees = listEmployee();
-    print_r($allEmployees);
-    $newId = count($allEmployees) + 1;
-    $newEmployee = array(
-        "id" => $newId, "name" => $_POST["name"], "lastName" => $_POST["lastName"], "gender" => $_POST["gender"], "email" => $_POST["email"], "age" => $_POST["age"], "city" => $_POST["city"],
-        "state" => $_POST["state"], "streetAddress" => $_POST["streetAddress"], "phoneNumber" => $_POST["phoneNumber"], "postalCode" => $_POST["postalCode"]
-    );
-
-
-    array_push($allEmployees, $newEmployee);
-    $jsonClients = json_encode($allEmployees);
-    $file = (".././../resources/employees.json");
-    file_put_contents($file, $jsonClients);
 }
 
 
-function deleteEmployee(string $id)
+function deleteEmployee($id)
 {
     // TODO implement it
+    $newEmployee = [];
+    $empleadosUncode = file_get_contents("../resources/employees.json");
+    $empleadosDecode = json_decode($empleadosUncode);
+        foreach ($empleadosDecode as $empleado) {
+        if (!$empleado->id == $id) {
+            array_push($newEmployee, $empleado);
+        }
+    }
+    sendEmployee($newEmployee);
+    echo "true";
 }
 
 
@@ -73,20 +73,13 @@ function sendEmployee($content)
 
 function getEmployee($id)
 {
-    $employees = listEmployee();
-    foreach ($empleados as $empleado) {
+    $empleadosUncode = file_get_contents("../resources/employees.json");
+    $empleadosDecode = json_decode($empleadosUncode);
+    foreach ($empleadosDecode as $empleado) {
         if ($empleado->id == $id) {
-            $formId = $empleado->id;
-            $formName = $empleado->name;
-            $formGender = $empleado->gender;
-            $formLastName = $empleado->lastNameme;
-            $formEmail = $empleado->email;
-            $formAge = $empleado->age;
-            $formCity = $empleado->city;
-            $formState = $empleado->state;
-            $formStreet = $empleado->streetAddress;
-            $formPhone = $empleado->phoneNumber;
-            $formPostalCode = $empleado->postalCode;
+            return $formInfo = array(
+        "id" => $empleado->id, "name" => $empleado->name, "lastName" => $empleado->lastName, "gender" => $empleado->gender, "email" => $empleado->email, "age" => $empleado->age, "city" => $empleado->age,
+        "state" => $empleado->state, "streetAddress" => $empleado->streetAddress, "phoneNumber" => $empleado->phoneNumber, "postalCode" => $empleado->postalCode);
         }
     }
 }

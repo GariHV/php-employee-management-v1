@@ -1,9 +1,10 @@
+
 window.addEventListener('DOMContentLoaded', async () => {
 
     const employees = await getEmployees();
     createGrid(employees);
 })
-console.log('a')
+
 async function getEmployees(){
     const response = await fetch(`./library/employeeController.php?getEmployees`);
     const data = await response.json();
@@ -28,14 +29,14 @@ function createGrid(employees){
 
 
         fields: [
-            { name: "name", type: "text", title: "Name"},
+            { name: "name", type: "text", title: "Name", validate: "required"},
             { name: "email", type: "text", title: "Email"},
-            { name: "age", type: "number", title: "Age"},
-            { name: "streetAddress", type: "number", title: "Street No." },
-            { name: "city", type: "text", title: "City" },
-            { name: "state", type: "text", title: "State" },
-            { name: "postalCode", type: "number", title: "Postal Code" },
-            { name: "phoneNumber", type: "number", title: "Phone Number" },
+            { name: "age", type: "number", title: "Age", validate: {validator: "range", param: [18,80]}},
+            { name: "streetAddress", type: "number", title: "Street No.", validate: "required"},
+            { name: "city", type: "text", title: "City", validate: "required"},
+            { name: "state", type: "text", title: "State", validate: "required" },
+            { name: "postalCode", type: "number", title: "Postal Code", validate: "required"},
+            { name: "phoneNumber", type: "number", title: "Phone Number", validate: "required"},
             { type: "control", rowClick: true, modeSwitchButton: true, editButton: true}
             ],
 
@@ -65,13 +66,20 @@ function createGrid(employees){
                 method: 'POST', body : formData,
             // headers: { 'Content-Type': 'aplication/json'}
         });
-
         console.log(formData["name"])
             // const data = await response.json();
             // return data;
         },
 
-        deleteItem: function name(item){},
+        deleteItem: async function name(item){
+            const response = await fetch ("./library/employeeController.php?delete="+item.id, {
+                method: "DELETE"
+            });
+            const date = await response.json();
+            if(date == true){
+                sendMessageOk("Employee Deleted")
+            }
+        },
 
         updateItem: async function name (item){
             var formData = new FormData();
@@ -90,7 +98,6 @@ function createGrid(employees){
             { method: 'POST', body :formData});
         },
 
-        
         },
     });
 }
