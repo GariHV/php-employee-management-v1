@@ -1,4 +1,5 @@
 window.addEventListener('DOMContentLoaded', async () => {
+
     const employees = await getEmployees();
     createGrid(employees);
 })
@@ -40,7 +41,7 @@ function createGrid(employees){
 
         rowClick: function displayEdit(args){
            /* ADD MODAL TOGGLE */
-            window.location.assign('./library/employeeController.php?id='+args.item.id)
+            window.location.assign('./employee.php?id='+args.item.id)
         },
 
         controller: {
@@ -59,7 +60,7 @@ function createGrid(employees){
             formData.append('postalCode', item.postalCode);
             console.log(item)
             console.log(formData)
-            
+
             const response = await fetch('./library/employeeController.php?add', {
                 method: 'POST', body : formData,
             // headers: { 'Content-Type': 'aplication/json'}
@@ -94,8 +95,7 @@ function createGrid(employees){
     });
 }
 
-const OkMessage = "Todo Correcto"
-sendMessageOk(OkMessage)
+
 function sendMessageOk(text){
     let messageOk = `<div class="alert alert-success msginfo" role="alert">${text}</div>`
     document.querySelector(".container").insertAdjacentHTML("beforeend", messageOk)
@@ -105,8 +105,7 @@ function sendMessageOk(text){
         ,3000)
 }
 
-const errorMessage = "Error"
-sendMessageError(errorMessage)
+
 function sendMessageError(text){
     let messageError = `<div class='alert alert-danger msginfo' role='alert'>${text}</div>`
     document.querySelector(".container").insertAdjacentHTML("beforeend", messageError)

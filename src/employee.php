@@ -90,8 +90,6 @@ $userName = $_SESSION["email"];
     </div>
   </section>
 </body>
-
-
 <!-- INSERT FOOTER -->
 <?php include('../assets/html/footer.html') ?>
 <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
