@@ -94,8 +94,8 @@ function createGrid(employees){
     });
 }
 
-const testing = "Todo Correcto"
-sendMessageOk("hello")
+const OkMessage = "Todo Correcto"
+sendMessageOk(OkMessage)
 function sendMessageOk(text){
     let messageOk = `<div class="alert alert-success msginfo" role="alert">${text}</div>`
     document.querySelector(".container").insertAdjacentHTML("beforeend", messageOk)
@@ -105,8 +105,8 @@ function sendMessageOk(text){
         ,3000)
 }
 
-const testing2 = "Error"
-sendMessageError("Error")
+const errorMessage = "Error"
+sendMessageError(errorMessage)
 function sendMessageError(text){
     let messageError = `<div class='alert alert-danger msginfo' role='alert'>${text}</div>`
     document.querySelector(".container").insertAdjacentHTML("beforeend", messageError)
