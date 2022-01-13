@@ -61,5 +61,5 @@ function exitSession(){
             );
         }
     session_destroy();
-    header("Location: ./loginManager.php");
+    header("Location: ../../index.php");
 }

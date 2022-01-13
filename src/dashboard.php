@@ -3,7 +3,10 @@
 session_start();
 isset($_SESSION["email"]) ? "": header("Location: ../index.php") ;
 $userName=$_SESSION["email"];
-require_once('./library/employeeManager.php')
+require_once('./library/employeeManager.php');
+if(isset($_GET["edit"])){
+    updateEmploye($_GET["edit"]);
+}
 ?>
 
 <!doctype html>
@@ -55,6 +58,7 @@ require_once('./library/employeeManager.php')
         <!-- Begin page content -->
         <section id="dashboard">
             <div class="container">
+                <div id="ten-countdown"></div>
                 <div id="gridTable">
                 </div>
             </div>

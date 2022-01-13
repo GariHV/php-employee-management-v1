@@ -31,5 +31,5 @@ if(isset($_GET["add"])){
 }
 
 if(isset($_GET["id"])){
-    header('Location: ../employee.php?id='+$_GET['id']);
+    header('Location: ../employee.php?id='+$_GET["id"]);
 }
