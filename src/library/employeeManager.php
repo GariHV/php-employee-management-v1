@@ -61,9 +61,7 @@ function updateEmployee($updateEmployee)
             $empleado->postalCode = $_POST['postalCode'];
         }
     }
-    echo ($_POST['city']);
     sendEmployee($empleados);
-    header('Location: ./library/employeeController.php?edit=' + $updateEmployee);
 }
 
 function sendEmployee($content)
@@ -73,11 +71,25 @@ function sendEmployee($content)
     $Allusers = file_put_contents($file, $usersAll);
 }
 
-
-// function getEmployee(string $id)
-// {
-//     // TODO implement it
-// }
+function getEmployee($id)
+{
+    $employees = listEmployee();
+    foreach ($empleados as $empleado) {
+        if ($empleado->id == $id) {
+            $formId = $empleado->id;
+            $formName = $empleado->name;
+            $formGender = $empleado->gender;
+            $formLastName = $empleado->lastNameme;
+            $formEmail = $empleado->email;
+            $formAge = $empleado->age;
+            $formCity = $empleado->city;
+            $formState = $empleado->state;
+            $formStreet = $empleado->streetAddress;
+            $formPhone = $empleado->phoneNumber;
+            $formPostalCode = $empleado->postalCode;
+        }
+    }
+}
 
 
 // function removeAvatar($id)

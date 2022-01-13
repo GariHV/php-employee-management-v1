@@ -40,7 +40,7 @@ function createGrid(employees){
 
         rowClick: function displayEdit(args){
            /* ADD MODAL TOGGLE */
-            window.location.assign('./employee.php?id='+args.item.id)
+            window.location.assign('./library/employeeController.php?id='+args.item.id)
         },
 
         controller: {

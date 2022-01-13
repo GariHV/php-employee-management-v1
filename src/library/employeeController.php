@@ -29,3 +29,7 @@ if(isset($_GET["edit"])){
 if(isset($_GET["add"])){
     addEmployee();
 }
+
+if(isset($_GET["id"])){
+    header('Location: ../employee.php?id='+$_GET['id']);
+}
