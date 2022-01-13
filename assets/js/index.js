@@ -65,13 +65,20 @@ function createGrid(employees){
                 method: 'POST', body : formData,
             // headers: { 'Content-Type': 'aplication/json'}
         });
-
         console.log(formData["name"])
             // const data = await response.json();
             // return data;
         },
 
-        deleteItem: function name(item){},
+        deleteItem: async function name(item){
+            const response = await fetch ("./library/employeeController.php?delete="+item.id, {
+                method: "DELETE"
+            });
+            const date = await response.json();
+            if(date == true){
+                sendMessageOk("Employee Deleted")
+            }
+        },
 
         updateItem: async function name (item){
             var formData = new FormData();
@@ -90,15 +97,11 @@ function createGrid(employees){
             { method: 'POST', body :formData});
         },
 
-        
         },
     });
 }
 
-<<<<<<< HEAD
-=======
-const OkMessage = "Todo Correcto"
-sendMessageOk(OkMessage)
+
 function sendMessageOk(text){
     let messageOk = `<div class="alert alert-success msginfo" role="alert">${text}</div>`
     document.querySelector(".container").insertAdjacentHTML("beforeend", messageOk)
@@ -108,8 +111,6 @@ function sendMessageOk(text){
         ,3000)
 }
 
-const errorMessage = "Error"
-sendMessageError(errorMessage)
 function sendMessageError(text){
     let messageError = `<div class='alert alert-danger msginfo' role='alert'>${text}</div>`
     document.querySelector(".container").insertAdjacentHTML("beforeend", messageError)
@@ -118,4 +119,3 @@ function sendMessageError(text){
         }
         ,3000)
 }
->>>>>>> dc9ba421d032a73a7647da3ec8f099b3e6188379
