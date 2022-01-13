@@ -156,5 +156,8 @@ footer{
 }
 
 
-
+.msginfo{
+    text-align: center;
+    z-index: 10;
+}
 

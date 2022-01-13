@@ -64,6 +64,7 @@ function createGrid(employees){
                 method: 'POST', body : formData,
             // headers: { 'Content-Type': 'aplication/json'}
         });
+
         console.log(formData["name"])
             // const data = await response.json();
             // return data;
@@ -88,6 +89,29 @@ function createGrid(employees){
             { method: 'POST', body :formData});
         },
 
+        
         },
     });
+}
+
+const testing = "Todo Correcto"
+sendMessageOk("hello")
+function sendMessageOk(text){
+    let messageOk = `<div class="alert alert-success msginfo" role="alert">${text}</div>`
+    document.querySelector(".container").insertAdjacentHTML("beforeend", messageOk)
+    setTimeout(function(){
+        document.querySelector(".msginfo").remove()
+        }
+        ,3000)
+}
+
+const testing2 = "Error"
+sendMessageError("Error")
+function sendMessageError(text){
+    let messageError = `<div class='alert alert-danger msginfo' role='alert'>${text}</div>`
+    document.querySelector(".container").insertAdjacentHTML("beforeend", messageError)
+    setTimeout(function(){
+        document.querySelector(".msginfo").remove()
+        }
+        ,3000)
 }
